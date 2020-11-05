@@ -40,6 +40,7 @@ $('#current-conditions').append('<h4>Current conditions in '+currentCity+'</h4>'
 $('#current-forecast').append('<p><strong>5-Day forecast for '+currentCity+'</strong></p>');
 
 let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q=minneapolis&appid='+weatherKey;
+let currentConditions;
 
 $.ajax({
   url: queryURL,
@@ -47,8 +48,12 @@ $.ajax({
 })
   .then(function(response) {
     console.log(response);
+      currentConditions = response;
   });
   
+  
+
+
   let testObj = {
   "coord": {
     "lon": -122.08,
