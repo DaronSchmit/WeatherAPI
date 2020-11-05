@@ -10,15 +10,49 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Weather API Homework</title>
-  </head>
+    </head>
 
-  <body>
-      <h1></h1>
+    <body>
+        <!-- Weather Dashboard topbar -->
+        <nav class = 'blue'>
+            <a class="brand-logo center">Daron's Weather Dashboard</a>
+        </nav>
 
+        <br>
 
+        <main class="container">
+            <row class='row'>    
+                <!-- aside with search field and saved searches -->
+                <column class='col s3 light-blue lighten-1 z-depth-2'> 
+                    <aside >Here's where the search field goes</aside>
+                </column>
 
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-  </body>
+                <column class = 'col s1'></column>
+
+                <!-- Main div with current weather conditions and forecast -->
+                <column class='col s8'>
+                    <row class='row'>
+                        <column class='col s12 light-blue z-depth-2'>
+                            <article>Here's where the current conditions go</article>
+                        </column>
+                        <!-- current conditions -->
+                    </row>
+                    <br>
+                    <row>
+                        <!-- 5-Day forecast lower div -->
+                        <column class='col s12 light-blue z-depth-2'>
+                            <article>Here's where the forecast goes</article>   
+                        </column>
+                              
+                    </row>
+                </column>
+        
+
+        <!--JavaScript at end of body for optimized loading-->
+         <script type="text/javascript" src="js/materialize.min.js"></script>
+         
+         </row>
+        </main>
+    </body>
 </html>
       
