@@ -34,3 +34,7 @@ for (let i = 0; i < cityHistory.length; i++){
   newLI.text(cityHistory[i]);
   historyUL.append(newLI);
 }
+
+//generate Current City current weather
+$('#current-conditions').append('<h4>Current conditions in '+currentCity+'</h4>');
+$('#current-forecast').append('<p><strong>5-Day forecast for '+currentCity+'</strong></p>');
