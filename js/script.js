@@ -3,8 +3,8 @@
 
 // Pull from localstorage
 
-let cityHistory = JSON.parse(localStorage.getItem("storedHistory"));
-let currentCity = JSON.parse(localStorage.getItem("storedCity"));
+let cityHistory = localStorage.getItem("storedHistory");
+let currentCity = localStorage.getItem("storedCity");
 
 //if there's no local storage, initialize base
 
@@ -12,9 +12,15 @@ if(cityHistory === null){
   cityHistory = [];
   localStorage.setItem('storedHistory', JSON.stringify(cityHistory) );
 }
+else{
+  cityHistory = JSON.parse(cityHistory);
+}
 if(currentCity === null){
   currentCity ='';
   localStorage.setItem('storedCity', JSON.stringify(currentCity));
+}
+else{
+  currentCity = JSON.parse(currentCity);
 }
 
 //generate city history in sidebar
@@ -31,7 +37,12 @@ $('#current-conditions').append('<h4>Current conditions in '+currentCity+'</h4>'
 $('#current-forecast').append('<p><strong>5-Day forecast for '+currentCity+'</strong></p>');
 
 
-
+function kelvToFar(kelvin){
+  let farenheit = kelvin-273.15;
+  farenheit = farenheit*9/5;
+  farenheit += 32;
+  return farenheit.toFixed(2);
+}
 
   
 //make button on click function to make api call
@@ -39,28 +50,46 @@ $('#current-forecast').append('<p><strong>5-Day forecast for '+currentCity+'</st
 //click takes input, makes API call using text input
 let currentConditions;
 
+let queryCity = $('input').val();
+let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q='+queryCity+'&appid='+weatherKey;
+
 $("#search-button").on('click',function(){
   event.preventDefault();
-  let queryCity = $('input').val();
-  let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q='+queryCity+'&appid='+weatherKey;
+let queryCity = $('input').val();
+let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q='+queryCity+'&appid='+weatherKey;
   
   $.ajax({
   url: queryURL,
   method: 'GET'
 })
   .then(function(response) {
+    //get API information
     console.log(response);
     currentConditions = response;
     currentCity = currentConditions.name;
-    let currentTemp = currentConditions.main.temp;
-    let currentHumidity = currentConditions.main.humidity;
-    let windSpeed = currentConditions.wind.speed;
-    cityHistory.push(currentCity);
     
-    localStorage.setItem('storedHistory', JSON.stringify(cityHistory))
+    //get current weather information
+    let currentTemp = currentConditions.main.temp;
+    currentTemp = kelvToFar(currentTemp);
+    let currentHumidity = currentConditions.main.humidity;
+    let windSpeed = currentConditions.wind.speed*2.237;
+    
+    //save search as current city, save in local storage, and update html
+    localStorage.setItem('storedCity', JSON.stringify(currentCity));
+    $('#current-city').text(currentCity);
+    $('#temp').text(currentTemp+"\u00B0 F");
+    $('#humidity').text("Humidity: "+currentHumidity+"%");
+    $('#wind').text("Wind Speed: "+windSpeed.toFixed(2)+"MPH");
+    
+    //add city to city search history and re-save to localstorage
+    cityHistory.push(currentCity);
+    localStorage.setItem('storedHistory', JSON.stringify(cityHistory));
+    
   });
+})//search button onclick
 
-  
-  
-  
-})
+function clearLocalStorage(){
+  localStorage.setItem('storedCity', "");
+  localStorage.setItem('storedHistory', []);
+}
+
