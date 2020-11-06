@@ -26,7 +26,21 @@
             <row class='row'>
                 <!-- aside with search field and saved searches -->
                 <column class='col s3 light-blue lighten-1 z-depth-2'>
-                    <aside >Here's where the search field goes
+                    <aside >
+                      <div class="row">
+                        <form class="col s12">
+                          <div class="row">
+                            <div class="input-field col s10 white-text" style="color: white">
+                              <input id="icon_prefix" type="text" class="validate">
+                              <label class="white-text" for="icon_prefix">City to Search</label>
+                              <a class="btn-search btn-small waves-effect waves-light blue prefix white-text" id="search-button"><i class="material-icons">search</i></a>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="row">
+
+                      </div>
                     <ul id='city-history'>
                     </ul>
                     </aside>
@@ -64,6 +78,9 @@
          <script type="text/javascript" src="js/script.js"></script>
          </row>
         </main>
+        
+        
+        
     </body>
 </html>
       
