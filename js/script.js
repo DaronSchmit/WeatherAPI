@@ -39,6 +39,8 @@ for (let i = 0; i < cityHistory.length; i++){
 $('#current-conditions').append('<h4>Current conditions in '+currentCity+'</h4>');
 $('#current-forecast').append('<p><strong>5-Day forecast for '+currentCity+'</strong></p>');
 
+let queryURL = 
+
 $.ajax({
   url: 'https://api.openweathermap.org/data/2.5/weather?q=minneapolis&appid=03dbb874c27b3c94348ae4926bdc02ca',
   method: 'GET'
