@@ -20,6 +20,7 @@
 
         <br>
 
+<<<<<<< HEAD
         <main class="container"> 
                 <!-- aside with search field and saved searches -->
                 <aside class='col s3 light-blue lighten-1 z-depth-2'>
@@ -39,6 +40,17 @@
                         </li>
                       </ul>
                 </aside>
+=======
+        <main class="container">
+            <row class='row'>
+                <!-- aside with search field and saved searches -->
+                <column class='col s3 light-blue lighten-1 z-depth-2'>
+                    <aside >Here's where the search field goes
+                    <ul id='city-history'>
+                    </ul>
+                    </aside>
+                </column>
+>>>>>>> d6b6863c1526493b62ad2bd06069b818d61af0d6
 
                 <column class = 'col s1'></column>
 
@@ -46,7 +58,11 @@
                 <column class='col s8'>
                     <row class='row'>
                         <column class='col s12 light-blue z-depth-2'>
-                            <article>Here's where the current conditions go</article>
+                            <article id='current-conditions'>
+                              <h4 id='current-city'></h4>
+                              Here's where the current conditions go
+                              
+                              </article>
                         </column>
                         <!-- current conditions -->
                     </row>
@@ -54,7 +70,7 @@
                     <row>
                         <!-- 5-Day forecast lower div -->
                         <column class='col s12 light-blue z-depth-2'>
-                            <article>Here's where the forecast goes</article>   
+                            <article id='current-forecast'>Here's where the forecast goes</article>
                         </column>
                               
                     </row>
@@ -63,7 +79,8 @@
 
         <!--JavaScript at end of body for optimized loading-->
          <script type="text/javascript" src="js/materialize.min.js"></script>
-         
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+         <script type="text/javascript" src="js/script.js"></script>
          </row>
         </main>
     </body>
