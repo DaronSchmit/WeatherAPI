@@ -51,20 +51,28 @@ function kelvToFar(kelvin){
 let currentConditions;
 
 let queryCity = $('input').val();
-let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q='+queryCity+'&appid='+weatherKey;
 
-$("#search-button").on('click',function(){
-  event.preventDefault();
-let queryCity = $('input').val();
-let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q='+queryCity+'&appid='+weatherKey;
-  
+
+//make API call
+function getWeather(query){
+  let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q='+queryCity+'&appid='+weatherKey;
   $.ajax({
-  url: queryURL,
-  method: 'GET'
-})
-  .then(function(response) {
-    //get API information
-    console.log(response);
+    url: queryURL,
+    method: 'GET'
+  })
+    .then(function(response) {
+      //get API information
+      console.log(response);
+  });
+}
+
+//set current weather using API call obj
+
+$("#search-button").on('click',function(event){
+  event.preventDefault();
+  let queryCity = $('input').val();
+  
+  
     currentConditions = response;
     currentCity = currentConditions.name;
     
@@ -86,7 +94,7 @@ let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q='+queryCity+'&a
     localStorage.setItem('storedHistory', JSON.stringify(cityHistory));
     
   });
-})//search button onclick
+});//search button onclick
 
 function clearLocalStorage(){
   localStorage.setItem('storedCity', "");
