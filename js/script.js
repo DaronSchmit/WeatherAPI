@@ -3,8 +3,8 @@
 
 // Pull from localstorage
 
-let cityHistory = JSON.parse(localStorage.getItem("storedHistory"));
-let currentCity = JSON.parse(localStorage.getItem("storedCity"));
+let cityHistory = localStorage.getItem("storedHistory");
+let currentCity = localStorage.getItem("storedCity");
 
 //if there's no local storage, initialize base
 
@@ -12,19 +12,16 @@ if(cityHistory === null){
   cityHistory = [];
   localStorage.setItem('storedHistory', JSON.stringify(cityHistory) );
 }
+else{
+  cityHistory = JSON.parse(cityHistory);
+}
 if(currentCity === null){
   currentCity ='';
   localStorage.setItem('storedCity', JSON.stringify(currentCity));
 }
-
-//testing city history and current city
-// currentCity = 'Minneapolis';
-// cityHistory = ['Houston','New York', 'Miami'];
-
-// localStorage.setItem('storedHistory', JSON.stringify(cityHistory) );
-// localStorage.setItem('storedCity', JSON.stringify(currentCity));
-
-
+else{
+  currentCity = JSON.parse(currentCity);
+}
 
 //generate city history in sidebar
 
@@ -39,71 +36,68 @@ for (let i = 0; i < cityHistory.length; i++){
 $('#current-conditions').append('<h4>Current conditions in '+currentCity+'</h4>');
 $('#current-forecast').append('<p><strong>5-Day forecast for '+currentCity+'</strong></p>');
 
-<<<<<<< HEAD
-let queryURL = 
 
-$.ajax({
-  url: 'https://api.openweathermap.org/data/2.5/weather?q=minneapolis&appid=03dbb874c27b3c94348ae4926bdc02ca',
-=======
-let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q=minneapolis&appid='+weatherKey;
+function kelvToFar(kelvin){
+  let farenheit = kelvin-273.15;
+  farenheit = farenheit*9/5;
+  farenheit += 32;
+  return farenheit.toFixed(2);
+}
+
+  
+//make button on click function to make api call
+
+//click takes input, makes API call using text input
 let currentConditions;
 
-$.ajax({
-  url: queryURL,
->>>>>>> 8d80a2ddd24a01fc4b5233c6f87e813bb4d021f0
-  method: 'GET'
-})
-  .then(function(response) {
-    console.log(response);
-      currentConditions = response;
+let queryCity = $('input').val();
+
+
+//make API call
+function getWeather(query){
+  let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q='+queryCity+'&appid='+weatherKey;
+  $.ajax({
+    url: queryURL,
+    method: 'GET'
+  })
+    .then(function(response) {
+      //get API information
+      console.log(response);
   });
+}
+
+//set current weather using API call obj
+
+$("#search-button").on('click',function(event){
+  event.preventDefault();
+  let queryCity = $('input').val();
   
   
+    currentConditions = response;
+    currentCity = currentConditions.name;
+    
+    //get current weather information
+    let currentTemp = currentConditions.main.temp;
+    currentTemp = kelvToFar(currentTemp);
+    let currentHumidity = currentConditions.main.humidity;
+    let windSpeed = currentConditions.wind.speed*2.237;
+    
+    //save search as current city, save in local storage, and update html
+    localStorage.setItem('storedCity', JSON.stringify(currentCity));
+    $('#current-city').text(currentCity);
+    $('#temp').text(currentTemp+"\u00B0 F");
+    $('#humidity').text("Humidity: "+currentHumidity+"%");
+    $('#wind').text("Wind Speed: "+windSpeed.toFixed(2)+"MPH");
+    
+    //add city to city search history and re-save to localstorage
+    cityHistory.push(currentCity);
+    localStorage.setItem('storedHistory', JSON.stringify(cityHistory));
+    
+  });
+});//search button onclick
 
+function clearLocalStorage(){
+  localStorage.setItem('storedCity', "");
+  localStorage.setItem('storedHistory', []);
+}
 
-  let testObj = {
-  "coord": {
-    "lon": -122.08,
-    "lat": 37.39
-  },
-  "weather": [
-    {
-      "id": 800,
-      "main": "Clear",
-      "description": "clear sky",
-      "icon": "01d"
-    }
-  ],
-  "base": "stations",
-  "main": {
-    "temp": 282.55,
-    "feels_like": 281.86,
-    "temp_min": 280.37,
-    "temp_max": 284.26,
-    "pressure": 1023,
-    "humidity": 100
-  },
-  "visibility": 16093,
-  "wind": {
-    "speed": 1.5,
-    "deg": 350
-  },
-  "clouds": {
-    "all": 1
-  },
-  "dt": 1560350645,
-  "sys": {
-    "type": 1,
-    "id": 5122,
-    "message": 0.0139,
-    "country": "US",
-    "sunrise": 1560343627,
-    "sunset": 1560396563
-  },
-  "timezone": -25200,
-  "id": 420006353,
-  "name": "Mountain View",
-  "cod": 200
-  }
-
-                
