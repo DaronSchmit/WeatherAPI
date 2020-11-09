@@ -112,7 +112,7 @@ function getForecastAndUV(querylon, querylat){
 
 //make API call and update html
 function getWeather(query){
-  let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q='+query+'&appid='+weatherKey;
+  let queryURL = 'https://api.openweathermap.org/data/2.5/weather?q='+query+'&appid='+weatherKey;
   $.ajax({
     url: queryURL,
     method: 'GET'
