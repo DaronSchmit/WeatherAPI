@@ -67,14 +67,15 @@ function updateArray(array, newValue){
 //generate Current City current weather
 $('#current-forecast').append('<p><strong>5-Day forecast for '+currentCity+'</strong></p>');
 
-
-function kelvToFar(kelvin){
+//do some math to convert temperature to something normal americans can understand
+function kelvToFar(kelvin){ 
   let farenheit = kelvin-273.15;
   farenheit = farenheit*9/5;
   farenheit += 32;
   return farenheit.toFixed(2);
 }
 
+//Is called by the getWeather function to get forecast and UVI
 function getForecastAndUV(querylon, querylat){
   let queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+querylat+"&lon="+querylon+"&appid="+ weatherKey;
 
@@ -99,19 +100,17 @@ function getForecastAndUV(querylon, querylat){
       $(newCardContentDiv).append('<p id="card'+i+'-temp">'+kelvToFar(response.daily[i].temp.day)+"\u00B0 F"+'</p>');
       $(newCardContentDiv).append('<p id="card'+i+'-humidity">'+response.daily[i].humidity+'% Humidity</p>');
 
-      $(newCardDiv).append(newCardContentDiv);
-      $(newforecastCard).append(newCardDiv);
-      // $('#forecast-title'+i).text(dateString);
-      // $('#forecast-day'+i+'-humidity').text(response.daily[i].humidity+"%");
-      // $('#forecast-day'+i+'-temp').text(kelvToFar(response.daily[i].temp+"\u00B0 F"));
-      $(".forecast-container").append(newforecastCard); //append that
+      $(newCardDiv).append(newCardContentDiv);//it puts the content in the card
+      $(newforecastCard).append(newCardDiv);//it puts the card in the forecastCard
+      $(".forecast-container").append(newforecastCard); //append that to the container
+      //materialize actually isn't as good as I though it was if I need all these divs for pete's sake
     }//do that 5 times
 
 
   })
 }
 
-//make API call
+//make API call and update html
 function getWeather(query){
   let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q='+query+'&appid='+weatherKey;
   $.ajax({
