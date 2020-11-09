@@ -159,5 +159,6 @@ $("#search-button").on('click',function(event){
 
 //if we have something saved as the current city, load it
 if(!currentCity === ""){
+  console.log("Getting weather on page load");
   getWeather(currentCity);
 }
