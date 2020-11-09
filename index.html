@@ -40,6 +40,7 @@
                         </form>
                       </div>
                       <div class="row">
+                        <!-- buttons are appended here after cities are searched for -->
                         <ul id='city-history'>
                         </ul>
                       </div>
@@ -51,6 +52,7 @@
                 <!-- Main div with current weather conditions and forecast -->
                 <column class='col s8'>
                     <row class='row'>
+                      <!-- current conditions -->
                         <column class='col s12 light-blue z-depth-2'>
                             <article id='current-conditions'>
                               <h4 id='current-city'></h4>
@@ -60,13 +62,13 @@
                               <p id="uvi"></p>
                               </article>
                         </column>
-                        <!-- current conditions -->
                     </row>
                     <br>
                     <row>
                         <!-- 5-Day forecast lower div -->
                         <column class='col s12 light-blue z-depth-2'>
                             <article id='current-forecast'></article>
+                            <!-- cards are appended here in js -->
                             <row class="row forecast-container">
                             </row>
                         </column>
