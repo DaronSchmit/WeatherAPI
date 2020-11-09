@@ -89,6 +89,7 @@ function getForecastAndUV(querylon, querylat){
     $('#uvi').text(response.current.uvi);
 
     //Generate 5-day forecast card in forecast-container
+    $(".forecast-container").empty(); //empty the container so you don't end up with 5 days of forecast for different cities
     for(let i = 1; i < 6; i++){
       let date = new Date(response.daily[i].dt*1000); //get future time
       let dateString = date.toDateString(); //convert it to a string
