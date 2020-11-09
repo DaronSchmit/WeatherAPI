@@ -21,7 +21,7 @@
         </nav>
 
         <br>
-
+<!-- Container for main area -->
         <main class="container">
             <row class='row'>
                 <!-- aside with search field and saved searches -->
@@ -30,7 +30,8 @@
                       <div class="row">
                         <form class="col s12">
                           <div class="row">
-                            <div class="input-field col s10 white-text" style="color: white">
+                            <!-- Search Field and button -->
+                            <div class="input-field col s10 white-text" style="color: white"> 
                               <input id="icon_prefix" type="text" class="validate">
                               <label class="white-text" for="icon_prefix" id="query-city">City to Search</label>
                               <a class="btn-search btn-small waves-effect waves-light blue prefix white-text" id="search-button"><i class="material-icons">search</i></a>
@@ -39,10 +40,9 @@
                         </form>
                       </div>
                       <div class="row">
-
+                        <ul id='city-history'>
+                        </ul>
                       </div>
-                    <ul id='city-history'>
-                    </ul>
                     </aside>
                 </column>
 
@@ -57,6 +57,7 @@
                               <p id="temp"></p>
                               <p id="humidity"></p>
                               <p id="wind"></p>
+                              <p id="uvi"></p>
                               </article>
                         </column>
                         <!-- current conditions -->
@@ -65,7 +66,9 @@
                     <row>
                         <!-- 5-Day forecast lower div -->
                         <column class='col s12 light-blue z-depth-2'>
-                            <article id='current-forecast'>Here's where the forecast goes</article>
+                            <article id='current-forecast'></article>
+                            <row class="row forecast-container">
+                            </row>
                         </column>
                               
                     </row>

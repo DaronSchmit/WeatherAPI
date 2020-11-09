@@ -35,14 +35,18 @@ function updateHistoryUL(array){
   for (let i = 0; i < array.length; i++){
     //console.log(array[i]);
     let buttonLabel = array[i];
-    let newLI = $('<li id="city-in-history"></li>');
-    let newButton = $('<button class="waves-effect waves-light btn sidebar-button" id="'+buttonLabel+'"></button');
+
+    let newLI = $('<li id="city-in-history"></li>'); //new list element
+    let newButton = $('<button class="waves-effect waves-light btn sidebar-button" id="'+buttonLabel+'"></button'); //new button element
     newButton.text(buttonLabel);
     newLI.append(newButton);
+
     $(newButton).on('click', function(){
-      getWeatherUpdateHTML($(newButton).attr("id"))
-    });
-    historyUL.append(newLI);
+      getWeather($(newButton).attr("id"))
+    }); //add onclick function re-display that city
+
+    historyUL.append(newLI);//add the list element with the button inside
+    historyUL.append('<br>');//spacing
   }
 }
 
@@ -61,7 +65,6 @@ function updateArray(array, newValue){
 }
 
 //generate Current City current weather
-$('#current-conditions').append('<h4>Current conditions in '+currentCity+'</h4>');
 $('#current-forecast').append('<p><strong>5-Day forecast for '+currentCity+'</strong></p>');
 
 
@@ -72,9 +75,44 @@ function kelvToFar(kelvin){
   return farenheit.toFixed(2);
 }
 
+function getForecastAndUV(querylon, querylat){
+  let queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+querylat+"&lon="+querylon+"&appid="+ weatherKey;
+
+  $.ajax({
+    url: queryURL,
+    method: 'GET'
+  })
+  .then(function(response){
+    console.log(response);
+    //get and set UVI
+    $('#uvi').text(response.current.uvi);
+
+    //Generate 5-day forecast card in forecast-container
+    for(let i = 1; i < 6; i++){
+      let date = new Date(response.daily[i].dt*1000); //get future time
+      let dateString = date.toDateString(); //convert it to a string
+      let newforecastCard = $('<div class="col s2"></div>'); //make a card to contain the forecast
+      let newCardDiv = $('<div class="card blue"></div>');
+      let newCardContentDiv = $('<div class="card-content white-text" id="card'+i+'"></div>');
+      //humidty, temp, and date
+      $(newCardContentDiv).append('<span class="card-title" style="font-size: medium; font-weight: strong;">'+dateString+'</span>');
+      $(newCardContentDiv).append('<p id="card'+i+'-temp">'+kelvToFar(response.daily[i].temp.day)+"\u00B0 F"+'</p>');
+      $(newCardContentDiv).append('<p id="card'+i+'-humidity">'+response.daily[i].humidity+'% Humidity</p>');
+
+      $(newCardDiv).append(newCardContentDiv);
+      $(newforecastCard).append(newCardDiv);
+      // $('#forecast-title'+i).text(dateString);
+      // $('#forecast-day'+i+'-humidity').text(response.daily[i].humidity+"%");
+      // $('#forecast-day'+i+'-temp').text(kelvToFar(response.daily[i].temp+"\u00B0 F"));
+      $(".forecast-container").append(newforecastCard); //append that
+    }//do that 5 times
+
+
+  })
+}
 
 //make API call
-function getWeatherUpdateHTML(query){
+function getWeather(query){
   let queryURL = 'http://api.openweathermap.org/data/2.5/weather?q='+query+'&appid='+weatherKey;
   $.ajax({
     url: queryURL,
@@ -104,6 +142,8 @@ function getWeatherUpdateHTML(query){
       localStorage.setItem('storedHistory', JSON.stringify(cityHistory));
       updateHistoryUL(cityHistory);
 
+      getForecastAndUV(response.coord.lon, response.coord.lat);
+
   });
 }
 
@@ -113,9 +153,9 @@ $("#search-button").on('click',function(event){
   event.preventDefault();
   let queryCity = $('input').val();
   
-  getWeatherUpdateHTML(queryCity);
+  getWeather(queryCity);
 
 
 });//search button onclick
 
-getWeatherUpdateHTML(currentCity);
+getWeather(currentCity);
