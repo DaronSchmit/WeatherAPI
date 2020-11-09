@@ -157,4 +157,7 @@ $("#search-button").on('click',function(event){
 
 });//search button onclick
 
-getWeather(currentCity);
+//if we have something saved as the current city, load it
+if(!currentCity === ""){
+  getWeather(currentCity);
+}
