@@ -76,7 +76,7 @@ function kelvToFar(kelvin){
 
 //Is called by the getWeather function to get forecast and UVI
 function getForecastAndUV(querylon, querylat){
-  let queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+querylat+"&lon="+querylon+"&appid="+ weatherKey;
+  let queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+querylat+"&lon="+querylon+"&appid="+weatherKey;
 
   $.ajax({
     url: queryURL,
