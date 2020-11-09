@@ -1,5 +1,4 @@
-// pseudocode
-// pull data from localstorage to build sidebar city history and current city weather and forecast
+weatherKey = '03dbb874c27b3c94348ae4926bdc02ca'; //I don't want to publish this, but environmental variables are hard
 
 // Pull from localstorage
 
@@ -86,7 +85,7 @@ function getForecastAndUV(querylon, querylat){
   .then(function(response){
     console.log(response);
     //get and set UVI
-    $('#uvi').text(response.current.uvi);
+    $('#uvi').text("UV Index: "+response.current.uvi);
 
     //Generate 5-day forecast card in forecast-container
     $(".forecast-container").empty(); //empty the container so you don't end up with 5 days of forecast for different cities
