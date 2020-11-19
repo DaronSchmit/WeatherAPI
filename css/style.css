@@ -43,3 +43,15 @@
    .input-field .prefix.active {
      color: white;
    }
+
+   @media screen and (max-width: 730px) {
+    #nav-header{
+      font-size: 1em;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    #nav-header{
+      font-size: .75em;
+    }
+  }

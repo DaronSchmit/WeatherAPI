@@ -5,6 +5,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <!--Materialized CSS link-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link rel="stylesheet" href="css/style.css"
     
     <!-- GHub links: https://www.github.com/daronschmit/WeatherAPI
     https://daronschmit.github.io/WeatherAPI/-->
@@ -17,7 +18,7 @@
     <body>
         <!-- Weather Dashboard topbar -->
         <nav class = 'blue'>
-            <a class="brand-logo center">Daron's Weather Dashboard</a>
+            <a class="brand-logo center" id="nav-header">Daron's Weather Dashboard</a>
         </nav>
 
         <br>
@@ -25,7 +26,7 @@
         <main class="container">
             <row class='row'>
                 <!-- aside with search field and saved searches -->
-                <column class='col s3 light-blue lighten-1 z-depth-2'>
+                <column class='col m3 s12 light-blue lighten-1 z-depth-2'>
                     <aside >
                       <div class="row">
                         <form class="col s12">
@@ -46,11 +47,12 @@
                       </div>
                     </aside>
                 </column>
+                <br><br>
 
-                <column class = 'col s1'></column>
+                <column class = 'col m1 s12'></column>
 
                 <!-- Main div with current weather conditions and forecast -->
-                <column class='col s8'>
+                <column class='col m8 s12'>
                     <row class='row'>
                       <!-- current conditions -->
                         <column class='col s12 light-blue z-depth-2'>

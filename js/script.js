@@ -36,7 +36,7 @@ function updateHistoryUL(array){
     let buttonLabel = array[i];
 
     let newLI = $('<li id="city-in-history"></li>'); //new list element
-    let newButton = $('<button class="waves-effect waves-light btn sidebar-button" id="'+buttonLabel+'"></button'); //new button element
+    let newButton = $('<button class="waves-effect waves-light btn sidebar-button center-align truncate" id="'+buttonLabel+'"></button'); //new button element
     newButton.text(buttonLabel);
     newLI.append(newButton);
 
@@ -92,7 +92,7 @@ function getForecastAndUV(querylon, querylat){
     for(let i = 1; i < 6; i++){
       let date = new Date(response.daily[i].dt*1000); //get future time
       let dateString = date.toDateString(); //convert it to a string
-      let newforecastCard = $('<div class="col s2"></div>'); //make a card to contain the forecast
+      let newforecastCard = $('<div class="col m2 s12"></div>'); //make a card to contain the forecast
       let newCardDiv = $('<div class="card blue"></div>');
       let newCardContentDiv = $('<div class="card-content white-text" id="card'+i+'"></div>');
       //humidty, temp, and date
